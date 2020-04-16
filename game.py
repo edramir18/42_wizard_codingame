@@ -43,6 +43,14 @@ class Team:
         self.wizards = []
 
 
+class Game:
+    def __init__(self, player, enemy, bludgers, snaffles):
+        self.player = player
+        self.enemy = enemy
+        self.bludgers = bludgers
+        self.snaffles = snaffles
+
+
 my_team_id = int(input())
 
 # game loop
