@@ -1,11 +1,49 @@
 import sys
 import math
 
-# Grab Snaffles and try to throw them through the opponent's goal!
-# Move towards a Snaffle to grab it and use your team id to determine towards where you need to throw it.
-# Use the Wingardium spell to move things around at your leisure, the more magic you put it, the further they'll move.
 
-my_team_id = int(input())  # if 0 you need to score on the right of the map, if 1 you need to score on the left
+class Entity:
+    def __init__(self, entity_id, entity_type, x, y, vx, vy, state):
+        self.id = int(entity_id)
+        self.type = entity_type
+        self.x = int(x)
+        self.y = int(y)
+        self.vx = int(vx)
+        self.vy = int(vy)
+        self.state = int(state)
+        self.mass = 0
+        self.radius = 0
+
+
+class Wizard(Entity):
+    def __init__(self, entity_id, entity_type, x, y, vx, vy, state):
+        super().__init__(entity_id, entity_type, x, y, vx, vy, state)
+        self.mass = 1
+        self.radius = 400
+
+
+class Snaffles(Entity):
+    def __init__(self, entity_id, entity_type, x, y, vx, vy, state):
+        super().__init__(entity_id, entity_type, x, y, vx, vy, state)
+        self.mass = 0.5
+        self.radius = 150
+
+
+class Bludgers(Entity):
+    def __init__(self, entity_id, entity_type, x, y, vx, vy, state):
+        super().__init__(entity_id, entity_type, x, y, vx, vy, state)
+        self.mass = 8
+        self.radius = 200
+
+
+class Team:
+    def __init__(self, score, magic):
+        self.score = score
+        self.magic = magic
+        self.wizards = []
+
+
+my_team_id = int(input())
 
 # game loop
 while True:
@@ -13,26 +51,7 @@ while True:
     opponent_score, opponent_magic = [int(i) for i in input().split()]
     entities = int(input())  # number of entities still in game
     for i in range(entities):
-        # entity_id: entity identifier
-        # entity_type: "WIZARD", "OPPONENT_WIZARD" or "SNAFFLE" or "BLUDGER"
-        # x: position
-        # y: position
-        # vx: velocity
-        # vy: velocity
-        # state: 1 if the wizard is holding a Snaffle, 0 otherwise. 1 if the Snaffle is being held, 0 otherwise. id of the last victim of the bludger.
-        entity_id, entity_type, x, y, vx, vy, state = input().split()
-        entity_id = int(entity_id)
-        x = int(x)
-        y = int(y)
-        vx = int(vx)
-        vy = int(vy)
-        state = int(state)
+        v1, v2, v3, v4, v5, v6, v7 = input().split()
+        entity = Entity(v1, v2, v3, v4, v5, v6, v7)
     for i in range(2):
-
-        # Write an action using print
-        # To debug: print("Debug messages...", file=sys.stderr)
-
-
-        # Edit this line to indicate the action for each wizard (0 ≤ thrust ≤ 150, 0 ≤ power ≤ 500, 0 ≤ magic ≤ 1500)
-        # i.e.: "MOVE x y thrust" or "THROW x y power" or "WINGARDIUM id x y magic"
         print("MOVE 8000 3750 100")
